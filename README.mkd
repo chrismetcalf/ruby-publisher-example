@@ -1,0 +1,1 @@
+An example of how to load data using a simple Ruby script. I've deliberately left it simple, while trying to account for all of the places where large dataset updates could cause things to happen asynchronously.

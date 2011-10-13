@@ -1,0 +1,26 @@
+# The ID of the published dataset you want to update
+uid: abcd-1234
+
+# An optional command you want to have run before the update
+#pre_command: whoami
+
+# The file you want to use for the update
+filename: your_file.csv
+
+# Whether or not you want to do an append or a replace
+# If you choose to do an append, the full dataset will be copied into a working
+# copy before the append. If you chose to do a replace, copySchema will be used.
+method: replace
+
+# Whether or not you want the publish step to be taken after the update
+publish: true
+
+# How long to wait between ticket checks
+delay: 10
+
+# Your Socrata authentication and application token
+socrata:
+  username: your.email@agency.gov
+  password: yourpass
+  domain: data.agency.gov
+  app_token: yourapplicationtoken
