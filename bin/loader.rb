@@ -73,13 +73,12 @@ elsif !results["ticket"].nil?
   ticket = results["ticket"]
 
   Logger.debug "Waiting on ticket #{ticket}"
-  while(results["id"].nil?)
+  while((results = socrata.get("/imports2.json?ticket=#{ticket}"))["id"].nil?)
+    Logger.debug "Still waiting on #{ticket}: #{results}"
     sleep config[:delay] || 60
-    results = socrata.get("/imports2.json?ticket=#{ticket}")
-    Logger.debug "Still waiting on #{ticket}"
   end
 
-  Logger.debug "Replace operation complete for http://#{config[:domain]}/d/#{draft_copy["id"]}}"
+  Logger.debug "Replace operation complete for http://#{config[:socrata][:domain]}/d/#{draft_copy["id"]}"
 else
   # Something has gone awry!
   Logger.critical "Something went wrong with the append or replace: #{results}"
@@ -92,6 +91,6 @@ if config[:publish]
   if results["id"] != config[:uid]
     Logger.critical "Something went wrong in publication, UIDs don't match: #{results}"
   else
-    Logger.debug "Publication was successful for http://#{config[:socrata][:domain]}/d/#{config[:uid]}!"
+    Logger.debug "Publication was successful for http://#{config[:socrata][:domain]}/d/#{results["id"]}!"
   end
 end

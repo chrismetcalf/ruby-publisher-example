@@ -7,6 +7,7 @@ class Socrata
   include HTTParty
   include HTTMultiParty
   #debug_output $stderr
+  default_timeout 3600
 
   attr_reader :batching
 
